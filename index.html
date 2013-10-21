@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Django-opengraph by leveille</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Django-opengraph</h1>
+        <p>Adds HTML Meta tags for OpenGraph support - Django &gt;= 1.4</p>
+        <p class="view"><a href="https://github.com/leveille/django-opengraph">View the Project on GitHub <small>leveille/django-opengraph</small></a></p>
+        <ul>
+          <li><a href="https://github.com/leveille/django-opengraph/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/leveille/django-opengraph/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/leveille/django-opengraph">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="opengraph-app-for-django--14" class="anchor" href="#opengraph-app-for-django--14"><span class="octicon octicon-link"></span></a>OpenGraph App for Django &gt;= 1.4</h1>
+
+<p>Adds HTML Meta tags for OpenGraph support.</p>
+
+<ul>
+<li><a href="http://ogp.me/">OpenGraph</a></li>
+<li><a href="https://developers.facebook.com/docs/opengraph/property-types/">Facebook OpenGraph</a></li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<pre><code>pip install -e git+git://github.com/leveille/django-opengraph.git#egg=opengraph
+</code></pre>
+
+<h2>
+<a name="upgrade" class="anchor" href="#upgrade"><span class="octicon octicon-link"></span></a>Upgrade</h2>
+
+<pre><code>pip install -U -e git+git://github.com/leveille/django-opengraph.git#egg=opengraph
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a name="optional-configuration" class="anchor" href="#optional-configuration"><span class="octicon octicon-link"></span></a>Optional Configuration</h3>
+
+<ol>
+<li>Add opengraph to your settings.py INSTALLED_APPS list</li>
+<li>There are a few configuration options to opengraph that can be placed in an OPTIONAL dictionary called OPENGRAPH_CONFIG in settings.py.</li>
+</ol><div class="highlight highlight-python"><pre><span class="n">OPENGRAPH_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'FB_ADMINS'</span><span class="p">:</span> <span class="s">'###'</span><span class="p">,</span>
+    <span class="s">'FB_APP_ID'</span><span class="p">:</span> <span class="s">'###'</span><span class="p">,</span>
+    <span class="s">'DEFAULT_IMAGE'</span><span class="p">:</span> <span class="s">'</span><span class="si">%s</span><span class="s">default/image.png'</span> <span class="o">%</span> <span class="n">STATIC_URL</span><span class="p">,</span>
+    <span class="s">'SITE_NAME'</span><span class="p">:</span> <span class="s">'Your Site Name'</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li><p><code>FB_ADMINS</code>: <strong>optional</strong>
+Something here</p></li>
+<li><p><code>FB_APP_ID</code>: <strong>optional</strong>
+Something here</p></li>
+<li><p><code>DEFAULT_IMAGE</code>: <strong>optional</strong>
+Default image to use in the open graph.</p></li>
+<li><p><code>SITE_NAME</code>:
+Name of your site</p></li>
+</ul><h3>
+<a name="loading-template-tags" class="anchor" href="#loading-template-tags"><span class="octicon octicon-link"></span></a>Loading Template Tags</h3>
+
+<ol>
+<li>Load the <code>opengraph_tags</code> custom tags</li>
+<li>Call the <code>opengraph</code> tag, passing in the appropriate parameters</li>
+</ol><p>Assume the following configuration:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">OPENGRAPH_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'FB_ADMINS'</span><span class="p">:</span> <span class="s">'123'</span><span class="p">,</span>
+    <span class="s">'FB_APP_ID'</span><span class="p">:</span> <span class="s">'456'</span><span class="p">,</span>
+    <span class="s">'DEFAULT_IMAGE'</span><span class="p">:</span> <span class="s">'</span><span class="si">%s</span><span class="s">default/image.png'</span> <span class="o">%</span> <span class="n">STATIC_URL</span><span class="p">,</span>
+    <span class="s">'SITE_NAME'</span><span class="p">:</span> <span class="s">'Your Site Name'</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="highlight highlight-html"><pre>{% load opengraph_tags %}
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Django OpenGraph Example<span class="nt">&lt;/title&gt;</span>
+        {% opengraph title='Django OpenGraph Example' description='This is a test' image="http://site.tld/image.png" %}
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>The result, including the use of the OPENGRAPH_CONFIG options defined above, would be:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"fb:admins"</span> <span class="na">content=</span><span class="s">"123"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"fb:app_id"</span> <span class="na">content=</span><span class="s">"456"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:title"</span> <span class="na">content=</span><span class="s">"Django OpenGraph Example"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:type"</span> <span class="na">content=</span><span class="s">"website"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:url"</span> <span class="na">content=</span><span class="s">"http://127.0.0.1:8000/"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:image"</span> <span class="na">content=</span><span class="s">"http://site.tld/image.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:description"</span> <span class="na">content=</span><span class="s">"This is a test"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:site_name"</span> <span class="na">content=</span><span class="s">"Your Site Name"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<h2>
+<a name="opengraph-tag" class="anchor" href="#opengraph-tag"><span class="octicon octicon-link"></span></a>OpenGraph Tag</h2>
+
+<pre><code>{% opengraph fb_admins="" fb_app_id="" site_name="" type="" url="" title="" description="" image="" %}
+</code></pre>
+
+<ul>
+<li><p><code>fb_admins</code>: <strong>optional</strong><br>
+The ID (or comma-separated list for properties that can accept multiple IDs) of an app, person using the app, or Page Graph API object.</p></li>
+<li><p><code>fb_app_id</code>: <strong>optional</strong><br>
+The ID of your Facebook Application</p></li>
+<li><p><code>site_name</code>: <strong>required if not defined by <code>SITE_NAME</code> in OPENGRAPH_CONFIG</strong><br>
+If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"</p></li>
+<li><p><code>type</code>: <strong>optional</strong><br>
+The type of your object, e.g., "video.movie".<br>
+Defaults to <code>website</code></p></li>
+<li><p><code>url</code>: <strong>optional</strong><br>
+The canonical URL of your object that will be used as its permanent ID in the graph, e.g., "<a href="http://www.imdb.com/title/tt0117500/">http://www.imdb.com/title/tt0117500/</a>".
+Defaults to <code>request.build_absolute_url()</code></p></li>
+<li><p><code>title</code>: <strong>required</strong><br>
+The title of your object as it should appear within the graph, e.g., "The Rock".  Title should be concise as it may be truncated depending on where it is used (in the NewsFeed, etc).</p></li>
+<li><p><code>description</code>: <strong>optional</strong><br>
+A one to two sentence description of your object.  Description should be concise as it may be truncated depending on where it is used (in the NewsFeed, etc).</p></li>
+<li><p><code>image</code>: <strong>required if not defined by <code>DEFAULT_IMAGE</code> in OPENGRAPH_CONFIG</strong><br>
+An image URL which should represent your object within the graph.<br>
+Defaults to <code>DEFAULT_IMAGE</code> if defined in <code>OPENGRAPH_CONFIG</code></p></li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/leveille">leveille</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
