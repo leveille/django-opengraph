@@ -1,0 +1,10 @@
+{% block opengraph %}
+{% if fb_admins %}<meta property="fb:admins" content="{{ fb_admins }}">{% endif %}
+{% if fb_app_id %}<meta property="fb:app_id" content="{{ fb_app_id }}">{% endif %}
+{% if title %}<meta property="og:title" content="{{ title }}">{% endif %}
+{% if type %}<meta property="og:type" content="{{ type }}">{% endif %}
+{% if url %}<meta property="og:url" content="{{ url }}">{% endif %}
+{% for img in images %}<meta property="og:image" content="{{ img }}">{% endfor %}
+{% if description %}<meta property="og:description" content="{{ description }}">{% endif %}
+{% if site_name %}<meta property="og:site_name" content="{{ site_name }}">{% endif %}
+{% endblock %}
