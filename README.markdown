@@ -99,14 +99,14 @@ The result, including the use of the OPENGRAPH_CONFIG options defined above, wou
 * `fb_app_id`: __optional__
   The ID of your Facebook Application
 
-* `site_name`: __required if not defined by `SITE_NAME` in `OPENGRAPH_CONFIG` __
+* `site_name`: __required if not defined by `SITE_NAME` in OPENGRAPH_CONFIG__
   If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"
 
 * `type`: __optional__
   The type of your object, e.g., "video.movie".
   Defaults to `website`
 
-* `url`: _optional_
+* `url`: __optional__
   The canonical URL of your object that will be used as its permanent ID in the graph, e.g., "http://www.imdb.com/title/tt0117500/".
   Defaults to `request.build_absolute_url()`
 
@@ -116,7 +116,7 @@ The result, including the use of the OPENGRAPH_CONFIG options defined above, wou
 * `description`: __optional__
   A one to two sentence description of your object.  Description should be concise as it may be truncated depending on where it is used (in the NewsFeed, etc).
 
-* `image`: __required if not defined by `DEFAULT_IMAGE` in `OPENGRAPH_CONFIG` __
+* `image`: __required if not defined by `DEFAULT_IMAGE` in OPENGRAPH_CONFIG__
   An image URL which should represent your object within the graph.
   Defaults to `DEFAULT_IMAGE` if defined in `OPENGRAPH_CONFIG`
 
