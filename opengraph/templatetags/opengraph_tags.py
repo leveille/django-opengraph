@@ -38,7 +38,7 @@ def get_opengraph_attributes(context, kwargs):
 
 
 def normalize_image_url(request, image):
-    if image is None or 'http' in image or image[:2] == '//':
+    if image is None or image[:4] == 'http' or image[:2] == '//':
         return image
     host = request.get_host()
     protocol = 'http'
