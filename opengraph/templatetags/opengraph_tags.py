@@ -16,7 +16,12 @@ def opengraph(context, *args, **kwargs):
 def get_opengraph_attributes(context, kwargs):
     request = context['request']
     graph = {'title': kwargs.get('title', None), 'description': kwargs.get('description', None),
-             'type': kwargs.get('type', 'website'), 'url': kwargs.get('url', request.build_absolute_uri())}
+             'url': kwargs.get('url', request.build_absolute_uri())}
+
+    og_type = kwargs.get('type', None)
+    if og_type in EMPTY_VALUES:
+        og_type = 'website'
+    graph['type'] = og_type
 
     config = getattr(settings, 'OPENGRAPH_CONFIG', {})
     graph['fb_admins'] = kwargs.get('fb_admins', config.get('FB_ADMINS', None))

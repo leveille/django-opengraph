@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="django-opengraph",
-    version="0.0.5",
+    version="0.0.6",
     description="Adds HTML Meta tags for OpenGraph support.",
     long_description=open('README.markdown').read(),
     author="Jason Leveille",
