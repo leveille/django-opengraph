@@ -37,7 +37,6 @@ def get_opengraph_attributes(context, kwargs):
         image = None
     if isinstance(image, types.ListType):
         images = [normalize_image_url(request, img) for img in image]
-        images.insert(0, default_image)
     elif isinstance(image, types.StringType) or isinstance(image, SafeUnicode) or isinstance(image, unicode):
         images = [normalize_image_url(request, image)]
     graph['images'] = images
